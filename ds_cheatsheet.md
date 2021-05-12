@@ -522,6 +522,10 @@ plt.figure(figsize = (20,20))
 
 ## **Modeling**
 
+### **Genetic Programming**
+
+https://gplearn.readthedocs.io/en/stable/
+
 ### **Classification**
 
 #### Decision tree classifier
