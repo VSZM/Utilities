@@ -255,9 +255,11 @@ df = pd.read_csv('asd.csv', delimiter=';')
 
 ##### Export to excel
 
+
 ```python
 df.to_excel('results.xlsx', sheet_name='Sheet', index=False)
 ```
+[Pretty formatting excel](https://www.pbpython.com/improve-pandas-excel-output.html)
 
 ##### Multiple Dataframes to excel export
 
@@ -289,6 +291,14 @@ with pd.ExcelWriter(filename, engine='xlsxwriter') as writer:
 
 
 ## **Working with Dataframes**
+
+### Creating Dataframes
+
+#### Create Dataframe from lists
+
+```python
+df = pd.DataFrame(zip(['a', 'b'], [1, 2]), columns = ['strings', 'numbers'])
+```
 
 ### Iterating Dataframes 
 
