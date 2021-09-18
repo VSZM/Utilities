@@ -16,3 +16,13 @@ while (getline(f, s, ';')) {
     strings.push_back(s);
 }
 ```
+
+
+#### String to number
+
+```
+int std::stoi(string)
+long std::stol(string)
+float stof(string)
+double stod(string)
+```
