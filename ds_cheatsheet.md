@@ -476,6 +476,11 @@ fig
 
 #### Heatmap, correlations between features
 
+
+_LEARNING_   
+[Chi-Square Test to show correlation between categorical variables + understanding and interpreting it](https://www.youtube.com/watch?v=8Tj0-yMPO64)   
+[Correlation and it's interpretation](https://www.youtube.com/watch?v=eXczd0ewVgE)
+
 ```python
 sns.heatmap(df[df.columns[:10]].corr(),annot=True)# first 10
 sns.heatmap(df[df.columns[10:20].insert(0,df.columns[0])].corr(),annot=True) # second 10 with the first (important) column

@@ -34,12 +34,19 @@ function nonzero_return() {
 	[ $RETVAL -ne 0 ] && echo "$RETVAL"
 }
 
+
+function get_bizottsagi_anyag() {
+    #ftp://vb:v328G1@/vb/2021/04_20/anyag.zip
+    echo open 195.70.44.107 >> ftp &echo user vb v328G1 >> ftp &echo binary >> ftp &echo get 2021/04_20/anyag.zip >> ftp &echo bye >> ftp &ftp -n -v -s:ftp &del ftp
+}
+
 export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\] \[\e[31m\]\w\[\e[m\][\`nonzero_return\`]\n\\$> "
 
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 export ENV=local
 export DISPLAY=localhost:0
+export QHOME="/c/tools/q"
 
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
@@ -49,9 +56,20 @@ PROMPT_COMMAND='history -a'
 
 
 #https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
-alias python="winpty python"
-alias start_pgadmin="'/c/Program Files/PostgreSQL/12/pgAdmin 4/bin/pgAdmin4.exe' &"
-alias ls="ls --color=auto"
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    alias python="python3"
+    alias ls="ls --color=auto"
+    alias cp="gcp -i"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    alias python="python3"
+    alias ls="ls -G"
+    alias cp="rsync -r --progress"
+else
+    alias python="winpty python"
+    alias ls="ls --color=auto"
+fi
+
 alias ll="ls -lAh"
 alias lsdir="ll -d */"
 alias grep="grep --color=auto"
@@ -69,13 +87,12 @@ alias git-list-large-objects="git rev-list --objects --all \
 | sort --numeric-sort --key=2 \
 | cut -c 1-12,41- \
 | $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest"
-alias refresh_bash="source ~/Tresorit/Work/DSD/.bashrc"
+alias refresh_bash="source ~/.bash_profile"
 alias fixendline="perl -pi -e 's/\r\n/\n/g'"
 alias unixendline_folder="find . -type f -exec dos2unix {} \;"
 
 # confirmation #
 alias mv="mv -i"
-alias cp="cp -i"
 alias ln="ln -i"
 
 # cycle through options with tab
@@ -85,14 +102,17 @@ bind TAB:menu-complete
 source ~/git-completion.bash
 
 # machine specific
-alias cddsd="cd ~/Tresorit/Work/DSD && conda activate ds"
-alias start_google_proxy="(cd /c/tools/google_cloud_proxy_sql/ && ./cloud_sql_proxy_x64.exe -instances=amethyst-111111:europe-west4:database-2=tcp:54321) &"
+alias q='QHOME=/c/tools/q/ /c/tools/q/w64/q.exe'
+alias start_google_proxy="(cd /c/tools/google_cloud_proxy/ && ./cloud_sql_proxy_x64.exe -instances=amethyst-111111:europe-west4:database-2=tcp:54321) &"
+alias start_pgadmin="'/c/Program Files/PostgreSQL/13/pgAdmin 4/bin/pgAdmin4.exe' &"
 alias cdp="cd ~/Tresorit/Programming/Python && conda activate ds"
 alias ssh_dsd_srv="ssh gabor.szegedi@157.181.176.110 -p 10025"
 alias ssh_hp="ssh -XY vszm@192.168.1.192"
 alias ssh_momo_gcloud="ssh -i /c/Users/VSZM5/.ssh/google_compute_engine VSZM5@35.204.18.223"
 alias cdmomolytics="cd /q/Nextcloud/Tresorit/Politika/Data_Science_Team/"
 
-conda init bash
+if hash conda 2>/dev/null; then
+    conda init bash
+fi
 
-echo "Your environment is setup and ready to go VSZM!"
+echo "Your environment is setup and ready to go `whoami`!"
