@@ -107,7 +107,7 @@ alias start_google_proxy="(cd /c/tools/google_cloud_proxy/ && ./cloud_sql_proxy_
 alias start_pgadmin="'/c/Program Files/PostgreSQL/13/pgAdmin 4/bin/pgAdmin4.exe' &"
 alias cdp="cd ~/Tresorit/Programming/Python && conda activate ds"
 alias ssh_dsd_srv="ssh gabor.szegedi@157.181.176.110 -p 10025"
-alias ssh_hp="ssh -XY vszm@192.168.1.192"
+alias ssh_hp="ssh -XY vszm@192.168.0.192"
 alias ssh_momo_gcloud="ssh -i /c/Users/VSZM5/.ssh/google_compute_engine VSZM5@35.204.18.223"
 alias cdmomolytics="cd /q/Nextcloud/Tresorit/Politika/Data_Science_Team/"
 
