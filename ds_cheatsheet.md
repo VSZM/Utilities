@@ -264,7 +264,7 @@ df.to_excel('results.xlsx', sheet_name='Sheet', index=False)
 ##### Multiple Dataframes to excel export
 
 ```python
-writer = pd.ExcelWriter('pandas_multiple.xlsx', engine='xlsxwriter')
+writer = pd.ExcelWriter('pandas_multiple.xlsx', engine='openpyxl')
 
 df1.to_excel(writer, sheet_name='Sheet1')
 df2.to_excel(writer, sheet_name='Sheet2')
